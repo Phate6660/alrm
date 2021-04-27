@@ -27,7 +27,13 @@ TODO
 ----
 
 - Allowing queueing of audio
+- Multiple Modes:
+
+ + Alarm (set the actual time -- e.g. 5 AM)
+ + Stopwatch (set a time -- e.g. 30m)
+
 - Network support (e.g. file from server or youtube link)
 - Supply some audio clips along with the program, such as:
+
  + Annoying shrill alarm tones
  + Phone ringing
