@@ -52,7 +52,7 @@ fn main() {
     // TODO: Perhaps allow for the queueing of songs?
     // TODO: Network support (e.g. inputting a youtube url).
     // TODO: Supply some audio clips with the program, such as a phone ringing or a shrill alarm clock noise.
-    // Get a output stream handle to the default physical sound device
+    // Get a output stream handle to the default physical sound device.
     let (_stream, stream_handle) = OutputStream::try_default().unwrap();
     // Load the audio file.
     let file = BufReader::new(File::open(path).unwrap());
