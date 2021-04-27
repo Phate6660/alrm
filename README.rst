@@ -29,5 +29,5 @@ TODO
 - Allowing queueing of audio
 - Network support (e.g. file from server or youtube link)
 - Supply some audio clips along with the program, such as:
- + Annoying shrill alarm tones
- + Phone ringing
+  + Annoying shrill alarm tones
+  + Phone ringing
