@@ -14,8 +14,8 @@ Installation
 - ``git clone https://github.com/Phate6660/alrm && cd alrm``
 - ``cargo build --release`` OR ``cargo build --release --features=notify``
 
-I have split the notification off into a feature, so that way the amount
-of dependencies is cut in half for anyone who doesn't even want a notification.
+| I have split the notification off into a feature, so that way the amount
+| of dependencies is cut in half for anyone who doesn't even want a notification.
 
 Usage
 -----
