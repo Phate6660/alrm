@@ -20,8 +20,9 @@ Usage
 - ``TIME`` = the amount of time in seconds for the alarm to wait
 - ``FILE`` = the path to the audio file (flac/mp3/vorbis/wav supported)
 - ``MESSAGE`` = the message to be displayed when the alarm goes off
+- ``*`` = this can be anything, but it tells the program to send a notification with the alarm message instead of printing to stdout
 
-``./target/release/alrm TIME FILE MESSAGE``
+``./target/release/alrm TIME FILE MESSAGE *``
 
 TODO
 ----

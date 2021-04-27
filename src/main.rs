@@ -1,3 +1,4 @@
+use notify_rust::{Notification, Timeout};
 use rusty_audio::Audio;
 
 fn help() {
@@ -11,7 +12,6 @@ fn main() {
     // If the 2nd element in the argument vector doesn't exist
     // (meaning no args were passed), then display the help message.
     if args.get(1) == None { help(); }
-    
     let time = &args[1];
     // Match the first arg to the program for common help arguments and display the help message.
     match time.as_str() {
@@ -28,7 +28,7 @@ fn main() {
     let time = time.parse::<u64>().unwrap();
     println!("Alarm set for {} seconds.", time);
     std::thread::sleep(std::time::Duration::from_secs(time));
-    
+
     // Create a new audio soundsystem
     let mut audio = Audio::new();
 
@@ -40,7 +40,15 @@ fn main() {
     audio.play("alarm song");
 
     // Display the alarm message.
-    println!("{}", msg);
+    if args.get(4).is_some() {
+        Notification::new()
+            .summary(&msg)
+            .timeout(Timeout::Milliseconds(6000)) // Notification closes in 6s
+            .show()
+            .unwrap();
+    } else {
+        println!("{}", msg);
+    }
 
     // Wait for the audio to stop before quitting the program.
     audio.wait();
