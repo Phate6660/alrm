@@ -28,12 +28,19 @@ TODO
 ----
 
 - Allowing queueing of audio
+- Status:
+
+ + Current time
+ + Mode
+ + Remaining time
+
 - Multiple Modes:
 
  + Alarm (set the actual time -- e.g. 5 AM)
  + Stopwatch (set a time -- e.g. 30m)
 
 - Network support (e.g. file from server or youtube link)
+- REPL for commanding the program (e.g. pause/start/status/stop)
 - Supply some audio clips along with the program, such as:
 
  + Annoying shrill alarm tones
