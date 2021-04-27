@@ -27,11 +27,11 @@ fn display(msg: &str) {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    
+
     // If the 2nd element in the argument vector doesn't exist
     // (meaning no args were passed), then display the help message.
     if args.get(1) == None { help(); }
-    
+
     let time = &args[1];
     // Match the first arg to the program for common help arguments and display the help message.
     match time.as_str() {
@@ -52,7 +52,6 @@ fn main() {
     // TODO: Perhaps allow for the queueing of songs?
     // TODO: Network support (e.g. inputting a youtube url).
     // TODO: Supply some audio clips with the program, such as a phone ringing or a shrill alarm clock noise.
-    // TODO: Only FLAC and WAV are supported.
     // Get a output stream handle to the default physical sound device
     let (_stream, stream_handle) = OutputStream::try_default().unwrap();
     // Load the audio file.
