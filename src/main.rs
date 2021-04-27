@@ -64,7 +64,7 @@ fn main() {
     // long) as well as Vorbis.
     let duration = source.total_duration().unwrap();
     // Play the sound directly on the device.
-    stream_handle.play_raw(source.convert_samples());
+    stream_handle.play_raw(source.convert_samples()).unwrap();
 
     // Display the alarm message.
     display(msg);
