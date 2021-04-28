@@ -5,8 +5,17 @@ alrm
 Description
 -----------
 
-A WIP alarm program that are for sure going to be on Linux and Windows.
-Considering Android as well.
+A WIP alarm program.
+
+Supported platforms:
+
+- Linux
+- Windows
+
+Planned platforms:
+
+- Android
+- BSD (this actually probably works, but it's untested)
 
 Installation
 ------------
