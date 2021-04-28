@@ -4,6 +4,7 @@ use notify_rust::{Notification, Timeout};
 use rodio::{Decoder, OutputStream, source::Source};
 use std::fs::File;
 use std::io::BufReader;
+use std::io::prelude::*;
 
 fn help() {
     println!("3 args need to be passed to this program.\n\
@@ -25,7 +26,7 @@ fn display(msg: &str) {
     println!("{}", msg);
 }
 
-fn main() {
+fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
 
     // If the 2nd element in the argument vector doesn't exist
@@ -47,7 +48,68 @@ fn main() {
 
     let time = time.parse::<u64>().unwrap();
     println!("Alarm set for {} seconds.", time);
-    std::thread::sleep(std::time::Duration::from_secs(time));
+
+    // The file to be used as a way to input commands.
+    let pipe_path = "/tmp/alrm";
+    // Create the file by writing nothing to it.
+    std::fs::write(pipe_path, "")?;
+    let mut count = 0;
+    loop {
+        // Open the file to view inputted commands.
+        let pipe = File::open(pipe_path)?;
+        let mut buf_reader = BufReader::new(pipe);
+        let mut command = String::new();
+
+        // Store the contents of the file into the command variable.
+        buf_reader.read_to_string(&mut command)?;
+
+        // Overwrite the file to be blank again so that the command isn't ran more than once.
+        std::fs::write(pipe_path, "")?;
+
+        match command.trim() {
+            "status" => {
+                let status_message = format!("Seconds Passed: {}\nAmount Set:     {}", count, time);
+
+                #[cfg(not(feature = "notify"))]
+                println!("{}", status_message);
+
+                #[cfg(feature = "notify")]
+                Notification::new()
+                    .summary(&status_message)
+                    .timeout(Timeout::Milliseconds(6000))
+                    .show()
+                    .unwrap();
+            },
+            "stop" => {
+                let stop_message = "Stopped due to user command!";
+
+                #[cfg(not(feature = "notify"))]
+                println!("{}", stop_message);
+
+                #[cfg(feature = "notify")]
+                Notification::new()
+                    .summary(&stop_message)
+                    .timeout(Timeout::Milliseconds(6000))
+                    .show()
+                    .unwrap();
+
+                std::process::exit(0);
+            },
+            _ => ()
+        }
+
+        // Wait 1 second.
+        std::thread::sleep(std::time::Duration::from_secs(1));
+
+        // If the count of loops is equal to time, break and start playing audio,
+        // Else up the value of count and continue.
+        if count == time {
+            break;
+        } else {
+            count += 1;
+            continue;
+        }
+    }
 
     // TODO: Perhaps allow for the queueing of songs?
     // TODO: Network support (e.g. inputting a youtube url).
@@ -71,4 +133,5 @@ fn main() {
 
     // Wait for the audio to stop before quitting the program.
     std::thread::sleep(duration);
+    Ok(())
 }

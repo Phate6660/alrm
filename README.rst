@@ -35,6 +35,14 @@ Usage
 
 ``./target/release/alrm TIME FILE MESSAGE``
 
+| You may also interact with the alarm while it's running by sending commands to ``/tmp/alrm``
+| for example by doing something like ``echo "command" > /tmp/alrm``.
+
+Commands supported:
+
+- ``Status``
+- ``Stop``
+
 TODO
 ----
 
@@ -50,8 +58,8 @@ TODO
  + Alarm (set the actual time -- e.g. 5 AM)
  + Stopwatch (set a time -- e.g. 30m)
 
+- Named pipe for commanding the program (e.g. status/stop)
 - Network support (e.g. file from server or youtube link)
-- REPL for commanding the program (e.g. status/stop)
 - Supply some audio clips along with the program, such as:
 
  + Annoying shrill alarm tones
