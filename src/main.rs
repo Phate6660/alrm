@@ -13,18 +13,14 @@ fn help() {
 }
 
 #[cfg(feature = "notify")]
-fn display(msg: &str) {
+fn notify(message: &str) {
     Notification::new()
-        .summary(&msg)
-        .timeout(Timeout::Milliseconds(6000)) // Notification closes in 6s
+        .summary(&message)
+        .timeout(Timeout::Milliseconds(6000))
         .show()
         .unwrap();
 }
 
-#[cfg(not(feature = "notify"))]
-fn display(msg: &str) {
-    println!("{}", msg);
-}
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
@@ -74,11 +70,7 @@ fn main() -> std::io::Result<()> {
                 println!("{}", status_message);
 
                 #[cfg(feature = "notify")]
-                Notification::new()
-                    .summary(&status_message)
-                    .timeout(Timeout::Milliseconds(6000))
-                    .show()
-                    .unwrap();
+                notify(&status_message);
             },
             "stop" => {
                 let stop_message = "Stopped due to user command!";
@@ -87,11 +79,7 @@ fn main() -> std::io::Result<()> {
                 println!("{}", stop_message);
 
                 #[cfg(feature = "notify")]
-                Notification::new()
-                    .summary(&stop_message)
-                    .timeout(Timeout::Milliseconds(6000))
-                    .show()
-                    .unwrap();
+                notify(&stop_message);
 
                 std::process::exit(0);
             },
@@ -129,7 +117,13 @@ fn main() -> std::io::Result<()> {
     stream_handle.play_raw(source.convert_samples()).unwrap();
 
     // Display the alarm message.
-    display(msg);
+    // Print to stdout if not using the notification feature.
+    #[cfg(not(feature = "notify"))]
+    println!("{}", msg);
+
+    // Send a notification of the notification feature is enabled.
+    #[cfg(feature = "notify")]
+    notify(&msg);
 
     // Wait for the audio to stop before quitting the program.
     std::thread::sleep(duration);
