@@ -35,10 +35,11 @@ Usage
 
 ``./target/release/alrm TIME FILE MESSAGE``
 
-| You may also interact with the alarm while it's running by sending commands to ``/tmp/alrm``
-| for example by doing something like ``echo "command" > /tmp/alrm``.
-
-Commands supported:
+| You may also interact with the alarm while it's running 
+| by sending commands to ``/tmp/alrm``.
+| For example by doing something like ``echo "command" > /tmp/alrm``.
+| 
+| Commands supported:
 
 - ``Status``
 - ``Stop``
