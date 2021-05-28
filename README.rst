@@ -29,8 +29,8 @@ Installation
 Usage
 -----
 
-- ``TIME`` = the amount of time in seconds for the alarm to wait
-- ``FILE`` = the path to the audio file (flac/wav supported)
+- ``TIME`` = the time in ``HH:MM`` format (note that it is 24 hr (00-23))
+- ``FILE`` = the path to the audio file (flac/wav supported -- ``none`` if not wanted)
 - ``MESSAGE`` = the message to be displayed when the alarm goes off
 
 ``./target/release/alrm TIME FILE MESSAGE``
@@ -41,8 +41,8 @@ Usage
 | 
 | Commands supported:
 
-- ``Status``
-- ``Stop``
+- ``status``
+- ``stop``
 
 TODO
 ----
@@ -50,16 +50,10 @@ TODO
 - Allowing queueing of audio
 - Status:
 
- + Current time
- + Mode
+ + Current time, alarm set time -- done
  + Remaining time
 
-- Multiple Modes:
-
- + Alarm (set the actual time -- e.g. 5 AM)
- + Stopwatch (set a time -- e.g. 30m)
-
-- Named pipe for commanding the program (e.g. status/stop)
+- Named pipe for commanding the program (e.g. status/stop) -- done
 - Network support (e.g. file from server or youtube link)
 - Supply some audio clips along with the program, such as:
 
